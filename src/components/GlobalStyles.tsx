@@ -1,6 +1,5 @@
 'use client';
 
-import { Josefin_Sans } from 'next/font/google';
 import { createGlobalStyle, css } from 'styled-components';
 
 const styles = css`

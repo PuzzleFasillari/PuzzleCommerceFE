@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
+import Navbar from '@/components/Navbar/Navbar';
 import ApplicationProviders from '@/providers/Providers';
 import { RootContainer } from '@/styles/pages/home';
-import Navbar from '@/components/Navbar/Navbar';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Puzzle Ecommerce',
