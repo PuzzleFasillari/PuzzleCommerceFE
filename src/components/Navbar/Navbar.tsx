@@ -1,12 +1,29 @@
-import * as S from './style';
+import { Button, ButtonGroup, Container, Flex, Heading, Text } from '@chakra-ui/react';
+import { CartIcon, HeartIcon, ProfileIcon } from '../Icons';
+import SearchIcon from '../Icons/SearchIcon';
+import Input from '../ui/Input';
 
 const Navbar = () => {
   return (
-    <S.Nav>
-      <S.Center>
-        <S.Logo>PuzzlEcommerce</S.Logo>
-      </S.Center>
-    </S.Nav>
+    <Container maxW="container.xl" p={10}>
+      <Flex minWidth="max-content" alignItems="center" gap="12">
+        <Heading fontSize={16}>
+          <Text>PuzzlEcommerce</Text>
+        </Heading>
+        <Input placeholder="Search puzzle product" rightIcon={<SearchIcon />} rightIconBackground="pink" />
+        <ButtonGroup gap="1">
+          <Button rightIcon={<ProfileIcon fill="black" />} variant="outline">
+            Login
+          </Button>
+          <Button rightIcon={<HeartIcon />} variant="outline">
+            Wishlist
+          </Button>
+          <Button rightIcon={<CartIcon />} variant="outline">
+            Cart
+          </Button>
+        </ButtonGroup>
+      </Flex>
+    </Container>
   );
 };
 

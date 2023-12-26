@@ -1,5 +1,15 @@
+import { Box, Container, Flex } from '@chakra-ui/react';
+
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
-  return <div>Layout:{children}</div>;
+  return (
+    <Container maxW="container.xl">
+      <Flex justify="center">
+        <Box mt={60} w="md" boxShadow="2xl" px="10" py={10} rounded="md">
+          {children}
+        </Box>
+      </Flex>
+    </Container>
+  );
 };
 
 export default AuthLayout;

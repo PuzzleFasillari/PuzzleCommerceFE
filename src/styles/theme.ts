@@ -1,38 +1,37 @@
-import { Josefin_Sans } from 'next/font/google';
+import { extendTheme } from '@chakra-ui/react';
 
-const inter = Josefin_Sans({
-  weight: ['300', '400', '500', '700'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  display: 'swap',
-});
+const sizes = {
+  sizes: {
+    container: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+    },
+  },
+};
 
-const theme = {
+const theme = extendTheme({
   colors: {
     pink: '#FB2E86',
     red: '#FB2448',
     purple: {
-      default: '#7E33E0',
-      offPurple: '#9F63B5',
-      pantonePurple: '#E0D3F5',
+      100: '#E0D3F5',
+      200: '#9F63B5',
+      300: '#7E33E0',
     },
     blue: {
-      default: '#2F1AC4',
-      offBlue: '#151875',
-      offNavyBlue: '#3F509E',
-      navyBlue: '#151875',
-      skyBlue: 'linear-gradient(122deg, #F3F9FF 0%, #F1F0FF 100%)',
+      100: '#F3F9FF',
+      200: '#2F1AC4',
+      300: '#151875',
+      400: '#3F509E',
+      500: '#151875',
+    },
+    grey: {
+      default: '#9096B2',
     },
   },
-  fonts: {
-    josefinSans: inter.style.fontFamily,
-  },
-  fontWeights: inter.style.fontWeight,
-  fontSizes: {
-    small: '1em',
-    medium: '2em',
-    large: '3em',
-  },
-};
+  sizes,
+});
 
 export default theme;

@@ -1,6 +1,6 @@
 import Navbar from '@/components/Navbar/Navbar';
 import ApplicationProviders from '@/providers/Providers';
-import { RootContainer } from '@/styles/pages/home';
+import { fonts } from '@/styles/fonts';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,14 +10,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={fonts.inter.className}>
       <body>
         <ApplicationProviders>
-          <RootContainer>
-            <Navbar />
-            {children}
-            {/* <Footer /> */}
-          </RootContainer>
+          <Navbar />
+          {children}
+          {/* <Footer /> */}
         </ApplicationProviders>
       </body>
     </html>
