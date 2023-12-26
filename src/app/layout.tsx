@@ -1,6 +1,6 @@
-import Navbar from '@/components/Navbar/Navbar';
-import ApplicationProviders from '@/providers/Providers';
-import { fonts } from '@/styles/fonts';
+import Navbar from '@components/Navbar/Navbar';
+import ApplicationProviders from '@providers/Providers';
+import { fonts } from '@styles/fonts';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

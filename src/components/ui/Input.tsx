@@ -1,6 +1,6 @@
-import { InputModel } from '@/types/ui/input.model';
 import { Input as ChakraInput, IconButton, InputGroup, InputRightElement } from '@chakra-ui/react';
-import SearchIcon from '../Icons/SearchIcon';
+import SearchIcon from '@components/Icons/SearchIcon';
+import { InputModel } from '@models/ui/input.model';
 
 const Input = ({ size, inputGroupProps, rightIcon, rightIconBackground, ...rest }: InputModel) => {
   if (rightIcon) {

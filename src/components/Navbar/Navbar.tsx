@@ -1,7 +1,7 @@
 import { Button, ButtonGroup, Container, Flex, Heading, Text } from '@chakra-ui/react';
-import { CartIcon, HeartIcon, ProfileIcon } from '../Icons';
-import SearchIcon from '../Icons/SearchIcon';
-import Input from '../ui/Input';
+import { CartIcon, HeartIcon, ProfileIcon } from '@components/Icons';
+import SearchIcon from '@components/Icons/SearchIcon';
+import Input from '@components/ui/Input';
 
 const Navbar = () => {
   return (

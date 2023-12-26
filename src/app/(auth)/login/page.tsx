@@ -1,5 +1,5 @@
-import Input from '@/components/ui/Input';
 import { Button, Center, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
+import Input from '@components/ui/Input';
 
 const Page = () => {
   return (
