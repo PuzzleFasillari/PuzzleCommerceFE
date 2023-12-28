@@ -1,4 +1,4 @@
-import { extendTheme } from '@chakra-ui/react';
+import { CSSReset, extendTheme } from '@chakra-ui/react';
 
 const sizes = {
   sizes: {
@@ -9,6 +9,11 @@ const sizes = {
       xl: '1280px',
     },
   },
+};
+
+const config = {
+  initialColorMode: 'light',
+  useSystemColorMode: false,
 };
 
 const theme = extendTheme({
@@ -32,6 +37,8 @@ const theme = extendTheme({
     },
   },
   sizes,
+  config,
+  CSSReset,
 });
 
 export default theme;

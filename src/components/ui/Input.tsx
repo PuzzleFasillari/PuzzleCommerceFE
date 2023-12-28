@@ -1,12 +1,16 @@
 import { Input as ChakraInput, IconButton, InputGroup, InputRightElement } from '@chakra-ui/react';
 import SearchIcon from '@components/Icons/SearchIcon';
 import { InputModel } from '@models/ui/input.model';
+import { Ref, forwardRef } from 'react';
 
-const Input = ({ size, inputGroupProps, rightIcon, rightIconBackground, ...rest }: InputModel) => {
+const Input = (
+  { size, inputGroupProps, rightIcon, rightIconBackground, ...rest }: InputModel,
+  ref: Ref<HTMLInputElement>,
+) => {
   if (rightIcon) {
     return (
       <InputGroup>
-        <ChakraInput data-peer {...rest} />
+        <ChakraInput data-peer {...rest} ref={ref} />
         <InputRightElement>
           <IconButton
             backgroundColor={rightIconBackground && rightIconBackground}
@@ -17,7 +21,7 @@ const Input = ({ size, inputGroupProps, rightIcon, rightIconBackground, ...rest 
       </InputGroup>
     );
   }
-  return <ChakraInput {...rest} />;
+  return <ChakraInput ref={ref} {...rest} />;
 };
 
-export default Input;
+export default forwardRef(Input);
