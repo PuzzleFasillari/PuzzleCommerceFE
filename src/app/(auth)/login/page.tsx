@@ -1,9 +1,7 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
-import { Button, Center, FormControl, FormErrorMessage, Heading, Stack, Text } from '@chakra-ui/react';
-import Input from '@components/ui/Input';
-import { Controller, useForm } from 'react-hook-form';
+import { Button, Link } from '@nextui-org/react';
+import { useForm } from 'react-hook-form';
 
 const Page = () => {
   const {
@@ -18,14 +16,10 @@ const Page = () => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Center flexDirection="column">
-        <Heading fontSize="3xl" mb={2}>
-          Login
-        </Heading>
-        <Text fontSize="sm" color="grey.default">
-          Please login using account detail bellow.
-        </Text>
-        <Stack w="100%" spacing={4} mt={5} mb={5}>
+      <div>
+        <h1>Login</h1>
+        <h1>Please login using account detail bellow.</h1>
+        {/* <Stack w="100%" spacing={4} mt={5} mb={5}>
           <FormControl isInvalid={errors.email?.message ? true : false}>
             <Controller
               name="email"
@@ -35,7 +29,7 @@ const Page = () => {
               render={({ field: { ref, ...field }, fieldState: { invalid, error } }) => {
                 return (
                   <>
-                    <Input {...field} placeholder="Email Address" isInvalid={invalid} errorBorderColor="crimson" />
+                    <Input {...field} placeholder="Email Address" isInvalid={invalid} />
                     {invalid && <FormErrorMessage color="crimson">{error?.message}</FormErrorMessage>}
                   </>
                 );
@@ -50,20 +44,18 @@ const Page = () => {
               control={control}
               render={({ field: { ref, ...field }, fieldState: { invalid, error } }) => (
                 <>
-                  <Input {...field} placeholder="Password" isInvalid={invalid} errorBorderColor="crimson" />
+                  <Input {...field} placeholder="Password" isInvalid={invalid} />
                   {invalid && <FormErrorMessage color="crimson">{error?.message}</FormErrorMessage>}
                 </>
               )}
             />
           </FormControl>
-        </Stack>
-        <Button backgroundColor="pink" color="white" w="100%" mt={5} type="submit">
-          Login
-        </Button>
-        <Link href="/register" fontSize="sm" color="grey.default" mt={5}>
+        </Stack> */}
+        <Button type="submit">Login</Button>
+        <Link href="/register" size="md">
           Don’t have an Account? Create account
         </Link>
-      </Center>
+      </div>
     </form>
   );
 };

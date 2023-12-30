@@ -1,9 +1,6 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
-import { Button, Center, FormControl, FormErrorMessage, Heading, Stack, Text } from '@chakra-ui/react';
-import Input from '@components/ui/Input';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 const Page = () => {
   const {
@@ -18,7 +15,7 @@ const Page = () => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Center flexDirection="column">
+      {/* <Center flexDirection="column">
         <Heading fontSize="3xl" mb={2}>
           Register
         </Heading>
@@ -85,7 +82,7 @@ const Page = () => {
         <Link href="/login" fontSize="sm" color="grey.default" mt={5}>
           Do you have an Account? Sign in
         </Link>
-      </Center>
+      </Center> */}
     </form>
   );
 };
