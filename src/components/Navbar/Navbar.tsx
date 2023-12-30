@@ -1,3 +1,4 @@
+'use client';
 import { Button, ButtonGroup, Container, Flex, Heading, Text } from '@chakra-ui/react';
 import { CartIcon, HeartIcon, ProfileIcon } from '@components/Icons';
 import SearchIcon from '@components/Icons/SearchIcon';
@@ -8,7 +9,7 @@ const Navbar = () => {
     <Container maxW="container.xl" p={10}>
       <Flex minWidth="max-content" alignItems="center" gap="12">
         <Heading fontSize={16}>
-          <Text>PuzzlEcommerce</Text>
+          <Text cursor={'pointer'}>PuzzlEcommerce</Text>
         </Heading>
         <Input placeholder="Search puzzle product" rightIcon={<SearchIcon />} rightIconBackground="pink" />
         <ButtonGroup gap="1">
