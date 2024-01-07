@@ -16,7 +16,7 @@ const Input = (
         <InputRightElement>
           <IconButton
             backgroundColor={rightIconBackground && rightIconBackground}
-            aria-label="search button"
+            aria-label="icon button"
             icon={<SearchIcon />}
           />
         </InputRightElement>
