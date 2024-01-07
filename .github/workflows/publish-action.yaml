@@ -22,7 +22,7 @@ jobs:
 
     - name: Build and Push Docker Images
       run: |
-        docker build -t ghcr.io/${{ secrets.ORG_USERNAME }}/${{ secrets.IMAGE_NAME_FE }}:${{ secrets.IMAGE_TAG }} .
+        docker build -t ghcr.io/${{ secrets.ORG_USERNAME }}/${{ secrets.IMAGE_NAME_FE }}:${{ secrets.IMAGE_TAG }} --build-arg NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }} .
         docker push ghcr.io/${{ secrets.ORG_USERNAME }}/${{ secrets.IMAGE_NAME_FE }}:${{ secrets.IMAGE_TAG }}
 
     - name: Deploy to Digital Ocean
