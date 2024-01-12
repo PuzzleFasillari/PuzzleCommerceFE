@@ -1,7 +1,6 @@
 'use client';
 
 import { Input as ChakraInput, IconButton, InputGroup, InputRightElement } from '@chakra-ui/react';
-import SearchIcon from '@components/Icons/SearchIcon';
 import { InputModel } from '@models/ui/input.model';
 import { Ref, forwardRef } from 'react';
 
@@ -17,7 +16,7 @@ const Input = (
           <IconButton
             backgroundColor={rightIconBackground && rightIconBackground}
             aria-label="search button"
-            icon={<SearchIcon />}
+            icon={rightIcon}
           />
         </InputRightElement>
       </InputGroup>

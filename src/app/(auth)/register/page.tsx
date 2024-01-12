@@ -8,7 +8,7 @@ import { RegisterRequestModel } from '@models/http/request/register-request.mode
 import { UserService } from '@service/user-service';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 const Page = () => {
@@ -22,8 +22,7 @@ const Page = () => {
   const router = useRouter();
   const {
     handleSubmit,
-    watch,
-    control,
+    register,
     formState: { errors, isSubmitting },
   } = useForm<RegisterRequestModel>({ resolver });
 
@@ -52,57 +51,20 @@ const Page = () => {
           </Box>
         )}
         <Stack w="100%" spacing={4} mt={5} mb={5}>
-          <FormControl isInvalid={errors.email?.message ? true : false}>
-            <Controller
-              name="email"
-              defaultValue=""
-              control={control}
-              render={({ field: { ref, ...field }, fieldState: { invalid, error } }) => {
-                return (
-                  <>
-                    <Input {...field} placeholder="Email Address" isInvalid={invalid} errorBorderColor="crimson" />
-                    {invalid && <FormErrorMessage color="crimson">{error?.message}</FormErrorMessage>}
-                  </>
-                );
-              }}
-            />
+          <FormControl isInvalid={errors.email ? true : false}>
+            <Input placeholder="Email" {...register('email')} />
+            {errors.email && <FormErrorMessage color="crimson">{errors.email?.message}</FormErrorMessage>}
           </FormControl>
-          <FormControl isInvalid={errors.username?.message ? true : false}>
-            <Controller
-              name="username"
-              defaultValue=""
-              control={control}
-              render={({ field: { ref, ...field }, fieldState: { invalid, error } }) => {
-                return (
-                  <>
-                    <Input {...field} placeholder="Username" isInvalid={invalid} errorBorderColor="crimson" />
-                    {invalid && <FormErrorMessage color="crimson">{error?.message}</FormErrorMessage>}
-                  </>
-                );
-              }}
-            />
+          <FormControl isInvalid={errors.username ? true : false}>
+            <Input placeholder="Username" {...register('username')} />
+            {errors.username && <FormErrorMessage color="crimson">{errors.username?.message}</FormErrorMessage>}
           </FormControl>
-          <FormControl isInvalid={errors.password?.message ? true : false}>
-            <Controller
-              name="password"
-              defaultValue=""
-              control={control}
-              render={({ field: { ref, ...field }, fieldState: { invalid, error } }) => (
-                <>
-                  <Input
-                    type="password"
-                    {...field}
-                    placeholder="Password"
-                    isInvalid={invalid}
-                    errorBorderColor="crimson"
-                  />
-                  {invalid && <FormErrorMessage color="crimson">{error?.message}</FormErrorMessage>}
-                </>
-              )}
-            />
+          <FormControl isInvalid={errors.password ? true : false}>
+            <Input placeholder="Password" type="password" {...register('password')} />
+            {errors.password && <FormErrorMessage color="crimson">{errors.password?.message}</FormErrorMessage>}
           </FormControl>
         </Stack>
-        <Button backgroundColor="pink" color="white" w="100%" mt={5} type="submit">
+        <Button isLoading={isSubmitting} backgroundColor="pink" color="white" w="100%" type="submit">
           Sign Up
         </Button>
         <Link href="/login" fontSize="sm" color="grey.default" mt={5}>
