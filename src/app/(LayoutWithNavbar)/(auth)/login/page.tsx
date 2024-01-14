@@ -69,7 +69,6 @@ const Page = () => {
           Don’t have an Account? Create account
         </Link>
       </Center>
-      {}
     </form>
   );
 };
