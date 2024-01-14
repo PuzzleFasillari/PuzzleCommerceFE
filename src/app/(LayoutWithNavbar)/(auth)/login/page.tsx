@@ -1,24 +1,20 @@
 'use client';
 
+import { loginAction } from '@actions/user-actions';
 import { Link } from '@chakra-ui/next-js';
 import { Box, Button, Center, FormControl, FormErrorMessage, Heading, Stack, Text } from '@chakra-ui/react';
 import Input from '@components/ui/Input';
 import useYupValidationResolver from '@hooks/useYupValidationResolver';
 import { LoginRequestModel } from '@models/http/request/login-request.model';
-import { UserService } from '@service/user-service';
+import { loginValidationSchema } from '@utils/validation-schemas';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 
 const Page = () => {
   const [errorMessage, setErrorMessage] = useState<boolean>();
   const router = useRouter();
-  const validationSchema = yup.object({
-    username: yup.string().min(3, 'Username should have at least 3 characters.').required('Username field is required'),
-    password: yup.string().min(6, 'Password should have at least 6 characters.').required('Password field is required'),
-  });
-  const resolver = useYupValidationResolver(validationSchema);
+  const resolver = useYupValidationResolver(loginValidationSchema);
   const {
     handleSubmit,
     register,
@@ -27,7 +23,7 @@ const Page = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await UserService.login(data);
+      await loginAction(data);
       router.push('/');
     } catch (error) {
       setErrorMessage(true);

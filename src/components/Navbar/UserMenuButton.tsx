@@ -1,11 +1,12 @@
 'use client';
+import { logoutAction } from '@actions/user-actions';
 import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
-import { removeUser } from '@utils/auth';
-import { useTransition } from 'react';
 import { FiArchive, FiChevronDown } from 'react-icons/fi';
 
 const UserMenuButton = () => {
-  const [isPending, startTransition] = useTransition();
+  const logout = async () => {
+    await logoutAction();
+  };
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<FiChevronDown />} variant="outline">
@@ -15,7 +16,7 @@ const UserMenuButton = () => {
         <MenuItem disabled icon={<FiArchive />}>
           Orders
         </MenuItem>
-        <MenuItem icon={<FiArchive />} onClick={() => startTransition(() => removeUser())}>
+        <MenuItem icon={<FiArchive />} onClick={logout}>
           Logout
         </MenuItem>
       </MenuList>

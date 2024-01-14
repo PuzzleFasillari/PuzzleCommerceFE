@@ -1,6 +1,5 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 
 const cookieStore = cookies();
@@ -13,5 +12,4 @@ export const getUser = () => {
 };
 export const removeUser = () => {
   cookieStore.delete('token');
-  revalidatePath('/');
 };
