@@ -1,5 +1,5 @@
 import { AspectRatio, Box, Center, Heading, Input, Stack, Text } from '@chakra-ui/react';
-import { CreateProductRequestModel } from '@models/http/request/add-product-request.model';
+import { CreatePuzzleFormModel } from '@models/ui/create-puzzle-form-model';
 import { motion, useAnimation } from 'framer-motion';
 import Image from 'next/image';
 import React from 'react';
@@ -8,7 +8,7 @@ import { UseFormRegister } from 'react-hook-form';
 interface ImageUploadProps {
   onImageUpload: React.ChangeEventHandler<HTMLInputElement>;
   previewImage: Blob | null;
-  register?: UseFormRegister<CreateProductRequestModel>;
+  register: UseFormRegister<CreatePuzzleFormModel>;
   name: string;
 }
 
@@ -45,17 +45,13 @@ const ImageUpload = ({ previewImage, onImageUpload, register, name }: ImageUploa
                     <Image src={URL.createObjectURL(previewImage)} alt="naruto" width={100} height={100} />
                   </AspectRatio>
                 )}
-                {!previewImage ? (
+                {!previewImage && (
                   <>
                     <Heading fontSize="lg" color="gray.700" fontWeight="bold">
                       Drop product image here
                     </Heading>
                     <Text fontWeight="light">or click to upload</Text>
                   </>
-                ) : (
-                  <Heading fontSize="lg" color="gray.700" fontWeight="bold">
-                    Image has been uploaded
-                  </Heading>
                 )}
               </Stack>
             </Stack>
@@ -71,7 +67,7 @@ const ImageUpload = ({ previewImage, onImageUpload, register, name }: ImageUploa
             opacity="0"
             aria-hidden="true"
             accept="image/*"
-            {...register}
+            {...register('file')}
             onDragEnter={startAnimation}
             onDragLeave={stopAnimation}
             onChange={onImageUpload}

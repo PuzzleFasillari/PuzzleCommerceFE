@@ -18,4 +18,5 @@ export interface ProductResponseModel {
   price: number;
   ageGroup: AgeGroupEnum;
   description: string;
+  imageUrl: string;
 }

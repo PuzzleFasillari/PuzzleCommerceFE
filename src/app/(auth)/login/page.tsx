@@ -10,8 +10,10 @@ import { loginValidationSchema } from '@utils/validation-schemas';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const Page = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState<boolean>();
   const router = useRouter();
   const resolver = useYupValidationResolver(loginValidationSchema);
@@ -20,6 +22,10 @@ const Page = () => {
     register,
     formState: { errors, isSubmitting },
   } = useForm<LoginRequestModel>({ resolver });
+
+  const onShowPasswordChange = () => {
+    setShowPassword(!showPassword);
+  };
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -49,16 +55,23 @@ const Page = () => {
         <Stack w="100%" spacing={4} mt={5} mb={5}>
           <Stack w="100%" spacing={4} mt={5} mb={5}>
             <FormControl isInvalid={errors.username ? true : false}>
-              <Input placeholder="Username" {...register('username')} />
+              <Input focusBorderColor="pink.400" placeholder="Username" {...register('username')} />
               {errors.username && <FormErrorMessage color="crimson">{errors.username?.message}</FormErrorMessage>}
             </FormControl>
             <FormControl isInvalid={errors.password ? true : false}>
-              <Input placeholder="Password" type="password" {...register('password')} />
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                buttonHandleClick={onShowPasswordChange}
+                rightIcon={showPassword ? <FiEyeOff /> : <FiEye />}
+                focusBorderColor="pink.400"
+                placeholder="Password"
+                {...register('password')}
+              />
               {errors.password && <FormErrorMessage color="crimson">{errors.password?.message}</FormErrorMessage>}
             </FormControl>
           </Stack>
         </Stack>
-        <Button isLoading={isSubmitting} backgroundColor="pink" color="white" w="100%" type="submit">
+        <Button isLoading={isSubmitting} colorScheme="pink" w="100%" type="submit">
           Login
         </Button>
         <Link href="/register" fontSize="sm" color="grey.default" mt={5}>

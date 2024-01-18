@@ -10,9 +10,11 @@ import { registerValidationSchema } from '@utils/validation-schemas';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const Page = () => {
   const [errorMessage, setErrorMessage] = useState<boolean>();
+  const [showPassword, setShowPassword] = useState(false);
   const resolver = useYupValidationResolver(registerValidationSchema);
   const router = useRouter();
   const {
@@ -21,6 +23,9 @@ const Page = () => {
     formState: { errors, isSubmitting },
   } = useForm<RegisterRequestModel>({ resolver });
 
+  const onShowPasswordChange = () => {
+    setShowPassword(!showPassword);
+  };
   const onSubmit = handleSubmit(async (data) => {
     try {
       await registerAction(data);
@@ -47,19 +52,26 @@ const Page = () => {
         )}
         <Stack w="100%" spacing={4} mt={5} mb={5}>
           <FormControl isInvalid={errors.email ? true : false}>
-            <Input placeholder="Email" {...register('email')} />
+            <Input placeholder="Email" {...register('email')} focusBorderColor="pink.400" />
             {errors.email && <FormErrorMessage color="crimson">{errors.email?.message}</FormErrorMessage>}
           </FormControl>
           <FormControl isInvalid={errors.username ? true : false}>
-            <Input placeholder="Username" {...register('username')} />
+            <Input placeholder="Username" {...register('username')} focusBorderColor="pink.400" />
             {errors.username && <FormErrorMessage color="crimson">{errors.username?.message}</FormErrorMessage>}
           </FormControl>
           <FormControl isInvalid={errors.password ? true : false}>
-            <Input placeholder="Password" type="password" {...register('password')} />
+            <Input
+              placeholder="Password"
+              type={showPassword ? 'text' : 'password'}
+              focusBorderColor="pink.400"
+              buttonHandleClick={onShowPasswordChange}
+              rightIcon={showPassword ? <FiEyeOff /> : <FiEye />}
+              {...register('password')}
+            />
             {errors.password && <FormErrorMessage color="crimson">{errors.password?.message}</FormErrorMessage>}
           </FormControl>
         </Stack>
-        <Button isLoading={isSubmitting} backgroundColor="pink" color="white" w="100%" type="submit">
+        <Button isLoading={isSubmitting} colorScheme="pink" w="100%" type="submit">
           Sign Up
         </Button>
         <Link href="/login" fontSize="sm" color="grey.default" mt={5}>

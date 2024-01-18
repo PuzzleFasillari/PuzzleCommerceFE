@@ -7,12 +7,7 @@ import {
   PuzzleTypesEnum,
 } from '@models/enums/puzzle-enum.model';
 
-export interface CreateProductRequestModel {
-  product_data: PuzzleDataModel;
-  file: File;
-}
-
-interface PuzzleDataModel {
+export interface CreatePuzzleFormModel {
   name: string;
   type: PuzzleTypesEnum;
   difficultyLevel: DifficultyLevelEnum;
@@ -23,4 +18,5 @@ interface PuzzleDataModel {
   ageGroup: AgeGroupEnum;
   description: string;
   imageUrl?: string;
+  file: File;
 }
