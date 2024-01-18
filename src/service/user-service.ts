@@ -1,4 +1,3 @@
-import { setUser } from '@lib/auth';
 import { LoginRequestModel } from '@models/http/request/login-request.model';
 import { RegisterRequestModel } from '@models/http/request/register-request.model';
 import { LoginResponseModel } from '@models/http/response/login-response.model';
@@ -15,12 +14,13 @@ export const UserService = {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        cache: 'no-cache',
       });
       if (!res.ok) {
         throw new Error(`${res.status} ${res.statusText}`);
       }
       const result: LoginResponseModel = await res.json();
-      setUser(result.access_token);
+      return result;
     } catch (error) {
       throw new Error(`${error}`);
     }
@@ -33,6 +33,7 @@ export const UserService = {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        cache: 'no-cache',
       });
       if (!res.ok) {
         throw new Error(`${res.status} ${res.statusText}`);
@@ -40,7 +41,7 @@ export const UserService = {
       const result: RegisterResponseModel = await res.json();
       return;
     } catch (error) {
-      console.log(error);
+      throw new Error(`${error}`);
     }
   },
 };

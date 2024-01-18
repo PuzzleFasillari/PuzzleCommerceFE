@@ -1,12 +1,11 @@
 'use client';
 
 import { Input as ChakraInput, IconButton, InputGroup, InputRightElement } from '@chakra-ui/react';
-import SearchIcon from '@components/Icons/SearchIcon';
 import { InputModel } from '@models/ui/input.model';
 import { Ref, forwardRef } from 'react';
 
 const Input = (
-  { size, inputGroupProps, rightIcon, rightIconBackground, ...rest }: InputModel,
+  { size, inputGroupProps, rightIcon, rightIconBackground, buttonHandleClick, ...rest }: InputModel,
   ref: Ref<HTMLInputElement>,
 ) => {
   if (rightIcon) {
@@ -15,9 +14,12 @@ const Input = (
         <ChakraInput data-peer {...rest} ref={ref} />
         <InputRightElement>
           <IconButton
-            backgroundColor={rightIconBackground && rightIconBackground}
+            size="sm"
+            colorScheme="pink"
+            variant="ghost"
             aria-label="search button"
-            icon={<SearchIcon />}
+            icon={rightIcon}
+            onClick={buttonHandleClick}
           />
         </InputRightElement>
       </InputGroup>

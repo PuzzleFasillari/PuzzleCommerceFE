@@ -1,35 +1,34 @@
 'use client';
 
+import { registerAction } from '@actions/user-actions';
 import { Link } from '@chakra-ui/next-js';
 import { Box, Button, Center, FormControl, FormErrorMessage, Heading, Stack, Text } from '@chakra-ui/react';
 import Input from '@components/ui/Input';
 import useYupValidationResolver from '@hooks/useYupValidationResolver';
 import { RegisterRequestModel } from '@models/http/request/register-request.model';
-import { UserService } from '@service/user-service';
+import { registerValidationSchema } from '@utils/validation-schemas';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import * as yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const Page = () => {
   const [errorMessage, setErrorMessage] = useState<boolean>();
-  const validationSchema = yup.object({
-    email: yup.string().required('Email field is required').email('Enter a valid mail address'),
-    username: yup.string().min(3, 'Username should have at least 3 characters.').required('Username field is required'),
-    password: yup.string().min(6, 'Password should have at least 6 characters.').required('Password field is required'),
-  });
-  const resolver = useYupValidationResolver(validationSchema);
+  const [showPassword, setShowPassword] = useState(false);
+  const resolver = useYupValidationResolver(registerValidationSchema);
   const router = useRouter();
   const {
     handleSubmit,
-    watch,
-    control,
+    register,
     formState: { errors, isSubmitting },
   } = useForm<RegisterRequestModel>({ resolver });
 
+  const onShowPasswordChange = () => {
+    setShowPassword(!showPassword);
+  };
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await UserService.register(data);
+      await registerAction(data);
       router.push('/login');
     } catch (error) {
       setErrorMessage(true);
@@ -52,57 +51,27 @@ const Page = () => {
           </Box>
         )}
         <Stack w="100%" spacing={4} mt={5} mb={5}>
-          <FormControl isInvalid={errors.email?.message ? true : false}>
-            <Controller
-              name="email"
-              defaultValue=""
-              control={control}
-              render={({ field: { ref, ...field }, fieldState: { invalid, error } }) => {
-                return (
-                  <>
-                    <Input {...field} placeholder="Email Address" isInvalid={invalid} errorBorderColor="crimson" />
-                    {invalid && <FormErrorMessage color="crimson">{error?.message}</FormErrorMessage>}
-                  </>
-                );
-              }}
-            />
+          <FormControl isInvalid={errors.email ? true : false}>
+            <Input placeholder="Email" {...register('email')} focusBorderColor="pink.400" />
+            {errors.email && <FormErrorMessage color="crimson">{errors.email?.message}</FormErrorMessage>}
           </FormControl>
-          <FormControl isInvalid={errors.username?.message ? true : false}>
-            <Controller
-              name="username"
-              defaultValue=""
-              control={control}
-              render={({ field: { ref, ...field }, fieldState: { invalid, error } }) => {
-                return (
-                  <>
-                    <Input {...field} placeholder="Username" isInvalid={invalid} errorBorderColor="crimson" />
-                    {invalid && <FormErrorMessage color="crimson">{error?.message}</FormErrorMessage>}
-                  </>
-                );
-              }}
-            />
+          <FormControl isInvalid={errors.username ? true : false}>
+            <Input placeholder="Username" {...register('username')} focusBorderColor="pink.400" />
+            {errors.username && <FormErrorMessage color="crimson">{errors.username?.message}</FormErrorMessage>}
           </FormControl>
-          <FormControl isInvalid={errors.password?.message ? true : false}>
-            <Controller
-              name="password"
-              defaultValue=""
-              control={control}
-              render={({ field: { ref, ...field }, fieldState: { invalid, error } }) => (
-                <>
-                  <Input
-                    type="password"
-                    {...field}
-                    placeholder="Password"
-                    isInvalid={invalid}
-                    errorBorderColor="crimson"
-                  />
-                  {invalid && <FormErrorMessage color="crimson">{error?.message}</FormErrorMessage>}
-                </>
-              )}
+          <FormControl isInvalid={errors.password ? true : false}>
+            <Input
+              placeholder="Password"
+              type={showPassword ? 'text' : 'password'}
+              focusBorderColor="pink.400"
+              buttonHandleClick={onShowPasswordChange}
+              rightIcon={showPassword ? <FiEyeOff /> : <FiEye />}
+              {...register('password')}
             />
+            {errors.password && <FormErrorMessage color="crimson">{errors.password?.message}</FormErrorMessage>}
           </FormControl>
         </Stack>
-        <Button backgroundColor="pink" color="white" w="100%" mt={5} type="submit">
+        <Button isLoading={isSubmitting} colorScheme="pink" w="100%" type="submit">
           Sign Up
         </Button>
         <Link href="/login" fontSize="sm" color="grey.default" mt={5}>
