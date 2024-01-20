@@ -24,12 +24,24 @@ export const ProductService = {
   },
   getProducts: async () => {
     try {
-      const res = await fetch(`${BASE_URL}/puzzles/puzzle-list`, {});
+      const res = await fetch(`${BASE_URL}/puzzles/puzzle-list`);
       if (!res.ok) {
         throw new Error(`${res.status} ${res.statusText}`);
       }
       const products: ProductResponseModel[] = await res.json();
       return products;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  },
+  getProduct: async (pid: string) => {
+    try {
+      const res = await fetch(`${BASE_URL}/puzzles/${pid}/detail`);
+      if (!res.ok) {
+        throw new Error(`${res.status} ${res.statusText}`);
+      }
+      const product: ProductResponseModel = await res.json();
+      return product;
     } catch (error) {
       throw new Error(`${error}`);
     }
