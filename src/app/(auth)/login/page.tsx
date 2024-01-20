@@ -48,7 +48,7 @@ const Page = () => {
         {errorMessage && (
           <Box bg="tomato" w="100%" mt={5} p={4} color="white">
             <Text textAlign="center" fontWeight={600}>
-              Email or password is wrong !
+              Username or password is wrong !
             </Text>
           </Box>
         )}

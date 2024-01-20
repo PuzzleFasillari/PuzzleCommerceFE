@@ -13,10 +13,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" data-theme="light" className={fonts.inter.className}>
       <body>
         <ApplicationProviders>
+          <Navbar />
           <Container minHeight="100vh" maxW="container.xl">
-            <Navbar />
             {children}
-            {/* <Footer /> */}
           </Container>
         </ApplicationProviders>
       </body>

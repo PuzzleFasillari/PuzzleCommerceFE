@@ -19,6 +19,7 @@ import {
 import ImageUpload from '@components/ui/ImageUpload';
 import useYupValidationResolver from '@hooks/useYupValidationResolver';
 import { CreatePuzzleFormModel } from '@models/ui/create-puzzle-form-model';
+import { ProductService } from '@service/product-service';
 import {
   AGE_GROUPS,
   DIFFICULTY_LEVELS,
@@ -87,8 +88,15 @@ export default function Page() {
         formData.append('file', image, (image as File).name);
       }
       try {
-        console.log(formData.get('file'));
-        // await ProductService.createProduct(formData);
+        await ProductService.createProduct(formData);
+        toast({
+          title: 'Product added.',
+          description: "You've added your product.",
+          status: 'success',
+          duration: 4000,
+          isClosable: true,
+        });
+        router.push('/');
       } catch (error) {
         throw new Error(`${error}`);
       }
