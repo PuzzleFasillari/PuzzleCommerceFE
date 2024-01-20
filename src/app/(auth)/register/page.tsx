@@ -2,7 +2,7 @@
 
 import { registerAction } from '@actions/user-actions';
 import { Link } from '@chakra-ui/next-js';
-import { Box, Button, Center, FormControl, FormErrorMessage, Heading, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Center, FormControl, FormErrorMessage, Heading, Stack, Text, useToast } from '@chakra-ui/react';
 import Input from '@components/ui/Input';
 import useYupValidationResolver from '@hooks/useYupValidationResolver';
 import { RegisterRequestModel } from '@models/http/request/register-request.model';
@@ -17,6 +17,7 @@ const Page = () => {
   const [showPassword, setShowPassword] = useState(false);
   const resolver = useYupValidationResolver(registerValidationSchema);
   const router = useRouter();
+  const toast = useToast();
   const {
     handleSubmit,
     register,
@@ -29,6 +30,13 @@ const Page = () => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       await registerAction(data);
+      toast({
+        title: 'Account created.',
+        description: "We've created your account.",
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+      });
       router.push('/login');
     } catch (error) {
       setErrorMessage(true);

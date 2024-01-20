@@ -9,7 +9,7 @@ export default async function Home() {
       {products.map((item, key) => (
         <Link key={key} href={`/product/${item._id}`}>
           <Card maxW="xs" h={300}>
-            <CardBody>
+            <CardBody pb={0}>
               <Center flexDirection="column">
                 <Image src={item.imageUrl} alt={'puzzle-image-' + key} h={140} maxH={140} borderRadius="lg" />
               </Center>
@@ -20,7 +20,7 @@ export default async function Home() {
                 {item.description}
               </Text>
             </CardBody>
-            <CardFooter justifyContent="space-between" alignItems="center" pt={2}>
+            <CardFooter justifyContent="space-between" alignItems="center">
               <Text color="pink.400" fontWeight={600} fontSize="md">
                 ${item.price}
               </Text>
